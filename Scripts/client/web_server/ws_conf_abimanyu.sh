@@ -64,6 +64,10 @@ echo '
     ServerName abimanyu.f01.com
     ServerAlias www.abimanyu.f01.com
     DocumentRoot /var/www/abimanyu.f01/
+    <Directory /var/www/abimanyu.f01/>
+        Option +Indexes
+        AllowOverride All
+    </Directory>
     DirectoryIndex index.php index.html
     ErrorLog ${APACHE_LOG_DIR}/abimanyu_error.log
     CustomLog ${APACHE_LOG_DIR}/abimanyu_access.log combined
@@ -78,7 +82,7 @@ echo '
     DocumentRoot /var/www/parikesit.abimanyu.f01
     Alias "/js" "/var/www/parikesit.abimanyu.f01/public/js"
     <Directory /var/www/parikesit.abimanyu.f01>
-        Options +FollowSymLinks -Multiviews
+        Options +Indexes +FollowSymLinks -Multiviews
         AllowOverride All 
         Require all granted
     </Directory>
@@ -151,7 +155,6 @@ echo '
 RewriteEngine On
 RewriteBase /
 
-# Remove index.php from the URL
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^index\.php/(.*)$ /$1 [L,R=301]
