@@ -65,7 +65,7 @@ echo '
     ServerAlias www.abimanyu.f01.com
     DocumentRoot /var/www/abimanyu.f01/
     <Directory /var/www/abimanyu.f01/>
-        Option +Indexes
+        Options +Indexes
         AllowOverride All
     </Directory>
     DirectoryIndex index.php index.html
@@ -84,21 +84,16 @@ echo '
     <Directory /var/www/parikesit.abimanyu.f01>
         Options +Indexes +FollowSymLinks -Multiviews
         AllowOverride All 
-        Require all granted
     </Directory>
     <Directory /var/www/parikesit.abimanyu.f01/public/>
         Options +Indexes
         AllowOverride All
-        Require all granted
     </Directory>
     <Directory /var/www/parikesit.abimanyu.f01/secret/>
         Options -Indexes
         AllowOverride Limit
         Require all denied
     </Directory>
-
-    RewriteEngine On
-    RewriteRule /abimanyu /var/www/parikesit.abimanyu.f01/public/images/abimanyu.png [L]
     ErrorLog ${APACHE_LOG_DIR}/parikesit_error.log
     CustomLog ${APACHE_LOG_DIR}/parikesit_access.log combined
 </VirtualHost>
@@ -165,6 +160,11 @@ Deny from all
 ' > /var/www/parikesit.abimanyu.f01/secret/.htaccess
 
 echo '
+RewriteEngine On
+RewriteCond %{REQUEST_URI} !^/public/images/abimanyu.png
+RewriteCond %{REQUEST_URI} abimanyu
+RewriteRule \.(jpg|jpeg|png)$ /public/images/abimanyu.png [L]
+
 ErrorDocument 403 /error/403.html
 ErrorDocument 404 /error/404.html
 ' > /var/www/parikesit.abimanyu.f01/.htaccess
@@ -180,6 +180,7 @@ server {
 
 echo nameserver 10.52.1.4 > /etc/resolv.conf
 echo nameserver 10.52.1.5 >> /etc/resolv.conf
+echo nameserver 192.168.122.1 >> /etc/resolv.conf
 
 a2ensite abimanyu.f01.conf
 a2ensite parikesit.abimanyu.f01.conf

@@ -1,4 +1,5 @@
-rm /etc/nginx/sites-available/default
+rm /etc/nginx/sites-available/*
+rm /etc/nginx/sites-enabled/*
 echo '
 upstream worker {
         server 10.52.3.2:8001;

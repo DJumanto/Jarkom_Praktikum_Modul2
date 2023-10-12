@@ -34,7 +34,7 @@ $TTL  604800
                         604800  )   ; Negative Cache TTL
 ;
 @   IN      NS      arjuna.f01.com.
-@   IN      A       10.52.1.4       ;
+@   IN      A       10.52.2.2       ;
 www IN      CNAME   arjuna.f01.com.
 @   IN      AAAA    ::1
 ' > /etc/bind/jarkom/arjuna.f01.com
