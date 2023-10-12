@@ -1,4 +1,4 @@
-mkdir /etc/bind/delegasi
+mkdir /etc/bind/Baratayuda
 
 echo 'zone "abimanyu.f01.com" {
     type slave;
@@ -14,7 +14,7 @@ zone "arjuna.f01.com" {
 
 zone "baratayuda.abimanyu.f01.com"{
     type master;
-    file "/etc/bind/delegasi/baratayuda.abimanyu.f01.com";
+    file "/etc/bind/Baratayuda/baratayuda.abimanyu.f01.com";
 };
 ' > /etc/bind/named.conf.local
 
@@ -44,7 +44,7 @@ $TTL  604800
 www IN      CNAME   baratayuda.abimanyu.f01.com.
 rjp IN      A       10.52.3.3       ;
 www.rjp IN      CNAME   rjp.baratayuda.abimanyu.f01.com.
-' > /etc/bind/delegasi/baratayuda.abimanyu.f01.com
+' > /etc/bind/Baratayuda/baratayuda.abimanyu.f01.com
 
 
 service bind9 restart
