@@ -142,7 +142,7 @@ ln -s /etc/nginx/sites-available/abimanyu.f01.com /etc/nginx/sites-enabled
 ln -s /etc/nginx/sites-available/rjp.baratayuda.abimanyu.f01.com /etc/nginx/sites-enabled
 
 chown -R www-data:www-data /var/www/rjp.baratayuda.abimanyu.f01/
-htpasswd -b /etc/nginx/.htpasswd Wayang baratayudaf01
+htpasswd -c /etc/nginx/.htpasswd Wayang
  
 service nginx restart
 
@@ -176,7 +176,7 @@ server {
 
     return 301 http://www.abimanyu.f01.com$request_uri;
 }
-' > /var/www/default_abimanyu
+' > /etc/nginx/sites-available/default_abimanyu
 
 echo nameserver 10.52.1.4 > /etc/resolv.conf
 echo nameserver 10.52.1.5 >> /etc/resolv.conf
