@@ -170,18 +170,19 @@ ErrorDocument 404 /error/404.html
 ' > /var/www/parikesit.abimanyu.f01/.htaccess
 
 echo '
-server {
-    listen 80 default_server;
-    server_name _;
+<VirtualHost *:80>
+    ServerName _
+    ServerAlias _
 
-    return 301 http://www.abimanyu.f01.com$request_uri;
-}
-' > /etc/nginx/sites-available/default_abimanyu
+    Redirect 301 / http://www.abimanyu.f01.com/
+</VirtualHost>
+' > /etc/apache2/sites-available/default_abimanyu.conf
 
 echo nameserver 10.52.1.4 > /etc/resolv.conf
 echo nameserver 10.52.1.5 >> /etc/resolv.conf
 echo nameserver 192.168.122.1 >> /etc/resolv.conf
 
+a2ensite default_abimanyu.conf
 a2ensite abimanyu.f01.conf
 a2ensite parikesit.abimanyu.f01.conf
 service apache2 restart
